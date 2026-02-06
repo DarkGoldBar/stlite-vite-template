@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stlite-vite-template"
+version = "1.0.0"
+description = "A template for Streamlit-Stlite-Vite tool chain"
+authors = [
+  { name = "Li Bochen", email = "libochen7@yahoo.co.jp" }
+]
+requires-python = ">=3.8"
+dependencies = [
+  "streamlit",
+]
+
+[tool.setuptools.packages.find]
+include = ["backend"]
