@@ -3,64 +3,26 @@
 
 # stlite-vite-template
 
-A technical template for building **Streamlit Web applications** using **stlite** and **Vite**.
-Place your Streamlit source code inside the `backend` directory, then generate a browser‑ready build with a single command.
+A specialized template designed to integrate **stlite** with **Vite** for building **Streamlit-driven Web Applications**.
 
----
+* **Seamless Transformation**: Port existing Streamlit projects to an stlite-based Web version with simple build commands.
+* **Vite Integration**: Leverages Vite’s asset-loading mechanisms to support **Hot Module Replacement (HMR)**—updating `.py` files will trigger instant UI refreshes during development.
 
 ## Project Overview
 
-This project separates Python application logic from the frontend build workflow:
+**Note**: All mandatory Python dependencies must be manually listed in the `requirements.txt` file for correct resolution by the stlite runtime.
 
-* `backend/` — Streamlit Python source code
-* Vite — Bundles the stlite Web runtime
-* npm scripts — Provide development and production build workflows
+### Directory Structure (`src/`)
 
-This template is suitable for developers who want to convert existing Streamlit apps into static web deployments.
-
----
-
-## Python Environment Setup
-
-Install required dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-* All Python libraries must be declared in this file. The web version downloads dependencies based on it during loading.
-* The Streamlit version should match the one used by `stlite@browser`.
-
----
-
-## Local Streamlit Development
-
-Run the application using the standard Streamlit runtime:
-
-```bash
-streamlit run app.py
-```
-
-* The web build loads `app_async.py`. If you change the entry file, update both entry points to keep behavior consistent.
-
----
-
-## Web Development Mode (Vite Dev Server)
-
-Start the frontend development server:
-
-```bash
-npm run dev
-```
-
-* File update logic is applied when the server starts.
-* After modifying Python files, restart the dev server.
-
----
+* `backend/`: The core directory for your Streamlit project logic.
+* `assets/`: Resource directory for static files (images, data, etc.) utilized by the Streamlit app.
+* `app.py`: The standard entry point for local execution (via `streamlit run`).
+* `app_async.py`: A Top-Level Await (TLA) compatible version of `app.py`.
+* `main.js`: The primary build script. If you modify the naming or location of the `backend` or `assets` directories, ensure the loading logic here is updated accordingly.
 
 ## Production Build
 
-Install Node.js dependencies and generate the web bundle:
+Install Node.js dependencies and generate the production-ready Web bundle:
 
 ```bash
 npm install
@@ -68,18 +30,33 @@ npm run build
 npm run preview
 ```
 
-* `build`: Compile the stlite web application
-* `preview`: Preview the production build locally
-* Output directory defaults to `dist`
+* **`build`**: Compiles the stlite Web application into static assets.
+* **`preview`**: Serves the build output locally for verification.
+* **Output**: The default production bundle is generated in the `dist/` directory.
 
----
+## Development
 
-## Custom Python Code Directory
+### Environment Setup
 
-Modify the value in `config.js`:
+Install the necessary Python and Node.js dependencies:
 
-```js
-export default {
-  backendDir: 'myPythonFolder',
-}
+```bash
+pip install -r requirements.txt
+npm install
+```
+
+### Local Streamlit Development
+
+Launch the application using the standard Streamlit runtime for debugging:
+
+```bash
+streamlit run src/app.py
+```
+
+### Local Web Development Mode
+
+Launch the Vite development server to preview the stlite/Wasm implementation:
+
+```bash
+npm run dev
 ```

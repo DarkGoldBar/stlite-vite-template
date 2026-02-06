@@ -8,8 +8,8 @@ async def main():
 
     with st.container(horizontal_alignment="center"):
         with st.container(horizontal=True, horizontal_alignment="center"):
-            st.image('public/vite.svg', width=100)
-            st.image('public/streamlit.png', width=200)
+            st.image('src/assets/vite.svg', width=100)
+            st.image('src/assets/streamlit.png', width=200)
 
         st.header('Vite + Stlite', width='content')
 

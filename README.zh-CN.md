@@ -3,58 +3,20 @@
 
 # stlite-vite-template
 
-一个用于结合 **stlite** 与 **Vite** 构建 **Streamlit Web 应用** 的技术模板。
-将你的 Streamlit 源代码放入 `backend` 目录，然后通过单个构建命令生成可在浏览器中运行的版本。
-
----
+一个用于结合 **stlite** 与 **Vite** 构建 **Streamlit Web 应用** 的模板。
+- 简单的构建命令将原有streamlit项目移动到基于Stlite的Web版本。
+- 使用Vite的import加载所有文件，更新.py文件可以触发HMR。
 
 ## 项目概览
 
-本项目将 Python 应用逻辑与前端构建流程进行分离：
+`requirements.txt`文件中必须手动记录运行必须的python包
 
-* `backend/` —— Streamlit Python 源代码
-* Vite —— 负责打包 stlite Web 运行时
-* npm scripts —— 提供开发与生产构建流程
-
-该模板适用于希望将现有 Streamlit 应用转换为静态 Web 部署的开发者。
-
----
-
-## Python 环境安装
-
-安装所需依赖：
-
-```bash
-pip install -r requirements.txt
-```
-- 必须在这个文件中标明你所用的库，Web页面在加载时下载这个文件指定的库。
-- streamlit版本请保持与stlite@browser使用的版本一致。
-
----
-
-## 本地 Streamlit 开发
-
-使用标准 Streamlit 运行时启动应用：
-
-```bash
-streamlit run app.py
-```
-
-- Web版加载时调用app_async.py，如果修改入口文件，需要同步修改两个入口文件来保持一致。
-
----
-
-## Web 开发模式（Vite Dev Server）
-
-启动前端开发服务器：
-
-```bash
-npm run dev
-```
-
-- 更新文件的逻辑在服务器开始时。
-- 更新python文件后需要关闭服务器重新打开。
----
+`src`目录文件用途
+- `backend`: streamlit项目目录
+- `assets`: streamlit项目的资源目录
+- `app.py`: 执行`streamlit run`的入口文件
+- `app_async.py`: `app.py`对应的Top Level Async版本。
+- `main.js`: 主要构建脚本，如果需要修改backend或者assets目录，需要修改对应的加载项。
 
 ## 生产构建
 
@@ -70,14 +32,27 @@ npm run preview
 - `preview`命令：在本地预览构建结果
 - 默认产物为`dist`目录
 
----
 
-## 自定义 Python 代码目录
+## 开发
 
-修改config.js中的值
+安装所需依赖：
 
-```js
-export default {
-  backendDir: 'myPythonFolder',
-}
+```bash
+pip install -r requirements.txt
+npm install
+```
+
+### 本地 Streamlit 开发
+使用标准 Streamlit 运行时启动应用：
+
+```bash
+streamlit run src/app.py
+```
+
+### 本地 Web 开发模式
+
+启动前端开发服务器：
+
+```bash
+npm run dev
 ```
